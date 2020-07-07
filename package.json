@@ -2,7 +2,7 @@
   "name": "etherstream_client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://elliotaplant.github.io/etherstream_client",
+  "homepage": "http://www.etherstream.io",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
