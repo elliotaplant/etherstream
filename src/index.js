@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+window.ws = new WebSocket('ws://localhost:8080')
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

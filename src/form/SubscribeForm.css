@@ -1,0 +1,28 @@
+.SubscribeForm-form {
+  margin: 0 auto;
+  max-width: 60rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.SubscribeForm-label {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.SubscribeForm-input {
+  flex-grow: 1;
+}
+
+.SubscribeForm-label-text {
+  margin-right: 1rem;
+  min-width: 10rem;
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+.SubscribeForm-button {
+  /* width: 50%; */
+  /* text-transform: uppercase; */
+}

@@ -1,0 +1,14 @@
+.Input-input {
+  flex-grow: 1;
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--font-light);
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid var(--blue-violet-color-wheel);
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

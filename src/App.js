@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import './colors.css';
+import Header from './header/Header.js'
+import SubscribeForm from './form/SubscribeForm.js'
 
 function App() {
+  const [events, setEvents] = useState([]);
+  window.ws.onmessage = (event) => {
+    const formatted = JSON.stringify(JSON.parse(event.data), null, 2);
+    setEvents([formatted, ...events])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <SubscribeForm subscribe={subscribe} />
+      <ul>
+        {events.map(event => <li key={event}><code>{event}</code></li>)}
+      </ul>
+    </>
   );
+}
+
+function subscribe(address, topic) {
+  window.ws.send(JSON.stringify({ action: 'subscribe', address, topic }))
 }
 
 export default App;

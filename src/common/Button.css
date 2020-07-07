@@ -1,0 +1,17 @@
+.Button-button {
+  color: var(--paradise-pink);
+  border: 1px solid var(--paradise-pink);
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 1.5rem;
+  font-family: monospace;
+  padding: .375rem .75rem;
+}
+
+.Button-button:hover {
+  color: white;
+  background-color: var(--paradise-pink);
+  border: 1px solid transparent;
+}
