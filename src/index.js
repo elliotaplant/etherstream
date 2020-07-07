@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-window.ws = new WebSocket('ws://localhost:8080')
+window.ws = new WebSocket(process.env.REACT_APP_WS_URL || 'ws://localhost:8080')
 
 ReactDOM.render(
   <React.StrictMode>
