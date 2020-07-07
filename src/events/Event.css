@@ -1,0 +1,9 @@
+.Event-li {
+  list-style: none;
+  border-bottom: 1px solid var(--blue-violet-color-wheel);
+  padding: 1rem 0;
+}
+
+.Event-code {
+  white-space: pre-wrap;
+}
