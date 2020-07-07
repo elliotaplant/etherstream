@@ -1,9 +1,11 @@
 .Event-li {
   list-style: none;
-  border-bottom: 1px solid var(--blue-violet-color-wheel);
-  padding: 1rem 0;
+  border-left: 2px solid var(--caribbean-green);
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .Event-code {
   white-space: pre-wrap;
+  color: var(--font-light);
 }
