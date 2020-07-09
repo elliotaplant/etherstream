@@ -15,12 +15,8 @@ function App({ socketConnected }) {
   const subscribe = async (address, topic) => {
     console.log('subscribing', address, topic);
     try {
-      const subscriptionResponse = await wsClient.subscribe({ address, topic }, (event) => {
-        console.log('event', event);
-        setEvents(events => ([
-          JSON.stringify(event.event, null, 2),
-          ...events.slice(0, 10),
-        ]))
+      const subscriptionResponse = await wsClient.subscribe({ address, topic }, ({ event }) => {
+        setEvents(events => ([ event, ...events.slice(0, 10), ]))
       });
       setSubscriptions([subscriptionResponse, ...subscriptions]);
     } catch (error) {
