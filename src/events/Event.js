@@ -5,7 +5,7 @@ function Event({ event }) {
   return (
     <li className="Event-li">
       <code className="Event-code">
-        {event}
+        {JSON.stringify(event, null, 2)}
       </code>
     </li>
   );

@@ -28,7 +28,10 @@ function App({ socketConnected }) {
   return (
     <>
       <Header />
-      {socketConnected ? <SubscribeForm subscribe={subscribe} /> : <p style={{textAlign: 'center'}}>Connecting to server</p>}
+      {socketConnected ?
+        <SubscribeForm subscribe={subscribe} setEvents={setEvents}/> :
+        <p style={{textAlign: 'center'}}>Connecting to server</p>
+      }
       {subscriptionError && <p>{subscriptionError.message}</p>}
       {subscriptions.map(s => <div key={s.subscriptionID}>{s.subscriptionID}</div>)}
       <Events events={events} />

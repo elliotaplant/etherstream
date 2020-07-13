@@ -6,9 +6,7 @@ import ClientConnectionWrapper from './ClientConnectionWrapper'
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ClientConnectionWrapper />
-  </React.StrictMode>,
+  <ClientConnectionWrapper />,
   document.getElementById('root')
 );
 
