@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./SubscribeForm.css";
 import Button from "../common/Button.js";
-import Input from "../common/Input.js";
 import AddressInput from './AddressInput.js'
 import TopicInput from './TopicInput.js'
 const Web3 = require('web3');
@@ -17,24 +16,19 @@ function fetchABI(address) {
 }
 
 function subscribe(address, topic, contract, setEvents) {
-  console.log('contract', contract);
   if (contract) {
-    console.log('topic.label', topic.label);
     contract.events[topic.label]((err, event) => {
       if (err) {
         console.error(err)
       } else {
-        console.log('event', event);
         setEvents(events => ([event, ...events]))
       }
     })
   } else {
     web3.eth.subscribe('logs', { address: address.address, topics: [topic.label] }, (err, event) => {
-      console.log('logs event', event);
       if (err) {
         console.error(err)
       } else {
-        console.log('event', event);
         setEvents(events => ([event, ...events]))
       }
     })
@@ -58,7 +52,7 @@ function SubscribeForm({ setEvents }) {
     setAddress(addressThing);
   };
 
-  let topics = null
+  let topics = []
   if (contract) {
     topics = Object.keys(contract.events)
       .filter(event => Number.isNaN(Number(event)) && !event.includes('('))
@@ -66,8 +60,8 @@ function SubscribeForm({ setEvents }) {
   }
 
   const storeTopic = topic => {
-    setTopic(topic);
     localStorage.setItem("topic", JSON.stringify(topic));
+    setTopic(topic);
   };
 
   return (
@@ -83,21 +77,13 @@ function SubscribeForm({ setEvents }) {
       </label>
       <label className="SubscribeForm-label">
         <span className="SubscribeForm-label-text">Topic</span>
-        {topics ?
-          <TopicInput
-            className="SubscribeForm-input"
-            placeholder="Topic"
-            value={topic}
-            topics={topics}
-            onChange={e => storeTopic(e)}
-          /> :
-          <Input
-            className="SubscribeForm-input"
-            placeholder="0x123..."
-            value={topic}
-            onChange={e => storeTopic(e.target.value)}
-          />
-        }
+        <TopicInput
+          className="SubscribeForm-input"
+          placeholder="Topic name (Transfer) or signature (0x123...)"
+          value={topic}
+          topics={topics}
+          onChange={e => storeTopic(e)}
+        />
       </label>
       <Button
         className="SubscribeForm-button"

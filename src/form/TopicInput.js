@@ -11,7 +11,7 @@ export default function TopicInput({ placeholder, value, onChange, topics }) {
       className="TopicInput-CreatableSelect"
       cacheOptions
       options={topics}
-      formatCreateLabel={(address) => `Use address ${address}`}
+      formatCreateLabel={(address) => `Use topic ${address}`}
     />
   );
 }
