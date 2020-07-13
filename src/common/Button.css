@@ -10,8 +10,31 @@
   padding: .375rem .75rem;
 }
 
+.Button-button.small {
+  border-radius: 3px;
+  font-size: 1rem;
+  padding: .25rem .5rem;
+}
+
 .Button-button:hover {
   color: white;
   background-color: var(--paradise-pink);
   border: 1px solid transparent;
+}
+
+.Button-button.go-green {
+  color: var(--go-green);
+  border-color: var(--go-green);
+}
+
+.Button-button.go-green:hover {
+  color: white;
+  background-color: var(--go-green);
+}
+
+.Button-button:disabled {
+  color: grey;
+  border: 1px solid grey;
+  background-color: transparent;
+  cursor: not-allowed;
 }

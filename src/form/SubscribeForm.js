@@ -6,8 +6,6 @@ import TopicInput from './TopicInput.js'
 const Web3 = require('web3');
 
 const web3 = new Web3(`wss://mainnet.infura.io/ws/v3/${process.env.REACT_APP_INFURA_ID}`)
-const localStorageAddress = localStorage.getItem("address") || '';
-const localStorageTopic = localStorage.getItem("topic") || '';
 
 function fetchABI(address) {
   return fetch(`https://api.etherscan.io/api?module=contract&action=getabi&address=${address}&apikey=YourApiKeyToken`)
@@ -15,29 +13,19 @@ function fetchABI(address) {
     .then(({ result }) => JSON.parse(result));
 }
 
-function subscribe(address, topic, contract, setEvents) {
+function subscribe(address, topic, contract, addSubscription) {
+  let subscription;
   if (contract) {
-    contract.events[topic.label]((err, event) => {
-      if (err) {
-        console.error(err)
-      } else {
-        setEvents(events => ([event, ...events]))
-      }
-    })
+    subscription = contract.events[topic.label]();
   } else {
-    web3.eth.subscribe('logs', { address: address.address, topics: [topic.label] }, (err, event) => {
-      if (err) {
-        console.error(err)
-      } else {
-        setEvents(events => ([event, ...events]))
-      }
-    })
+    subscription = web3.eth.subscribe('logs', { address: address.address, topics: [topic.label] });
   }
+  addSubscription({ subscription, contract: address.label, topic: topic.label })
 }
 
-function SubscribeForm({ setEvents }) {
-  const [address, setAddress] = useState(localStorageAddress && JSON.parse(localStorageAddress));
-  const [topic, setTopic] = useState(localStorageTopic && JSON.parse(localStorageTopic));
+function SubscribeForm({ addSubscription }) {
+  const [address, setAddress] = useState(null);
+  const [topic, setTopic] = useState(null);
   const [contract, setContract] = useState(null);
 
   const storeAddress = (addressThing) => {
@@ -91,7 +79,12 @@ function SubscribeForm({ setEvents }) {
         className="SubscribeForm-button"
         disabled={!(address && topic)}
         type="button"
-        onClick={() => subscribe(address, topic, contract, setEvents)}
+        onClick={() => {
+          subscribe(address, topic, contract, addSubscription)
+          setTopic(null)
+          setContract(null)
+          setAddress(null)
+        }}
       >
         Subscribe
       </Button>
