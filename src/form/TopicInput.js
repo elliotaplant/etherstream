@@ -10,6 +10,7 @@ export default function TopicInput({ placeholder, value, onChange, topics }) {
       placeholder={placeholder}
       className="TopicInput-CreatableSelect"
       cacheOptions
+      isClearable
       options={topics}
       formatCreateLabel={(address) => `Use topic ${address}`}
     />

@@ -18,6 +18,7 @@ export default function AddressInput({ placeholder, value, onChange }) {
       placeholder={placeholder}
       className="AddressInput-AsyncSelect"
       cacheOptions
+      isClearable
       loadOptions={promiseOptions}
       formatCreateLabel={(address) => `Use address ${address}`}
     />

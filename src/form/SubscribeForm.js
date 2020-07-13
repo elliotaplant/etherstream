@@ -36,18 +36,20 @@ function subscribe(address, topic, contract, setEvents) {
 }
 
 function SubscribeForm({ setEvents }) {
-  const [address, setAddress] = useState(localStorageAddress);
-  const [topic, setTopic] = useState(localStorageTopic);
+  const [address, setAddress] = useState(localStorageAddress && JSON.parse(localStorageAddress));
+  const [topic, setTopic] = useState(localStorageTopic && JSON.parse(localStorageTopic));
   const [contract, setContract] = useState(null);
 
   const storeAddress = (addressThing) => {
     localStorage.setItem("address", JSON.stringify(addressThing));
-    if (!addressThing.label.startsWith('0x')) {
-      fetchABI(addressThing.address)
+    if (addressThing) {
+      if (!addressThing.label.startsWith('0x')) {
+        fetchABI(addressThing.address)
         .then(abi => {
           const contract = new web3.eth.Contract(abi, addressThing.address)
           setContract(contract)
         })
+      }
     }
     setAddress(addressThing);
   };
@@ -87,6 +89,7 @@ function SubscribeForm({ setEvents }) {
       </label>
       <Button
         className="SubscribeForm-button"
+        disabled={!(address && topic)}
         type="button"
         onClick={() => subscribe(address, topic, contract, setEvents)}
       >
