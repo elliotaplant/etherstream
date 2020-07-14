@@ -1,0 +1,11 @@
+.Footer-footer {
+  display: flex;
+  background-color: var(--sunglow);
+  padding: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Footer-paragraph {
+  vertical-align: baseline;
+}

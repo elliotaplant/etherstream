@@ -5,8 +5,7 @@ export default function Header() {
   return <header className="Header-header">
     <h1 className="Header-title">Etherstream</h1>
     <div className="Header-paragraph">
-      Stream ethereum event logs.
-      Made by <a href="http://elliotplant.com">Elliot Plant</a>.
+      Stream ethereum event logs
     </div>
   </header>
 }

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import './App.css';
 import './colors.css';
 import Header from './header/Header.js'
+import Footer from './footer/Footer.js'
 import SubscribeForm from './form/SubscribeForm.js'
 import Events from './events/Events.js'
 import Subscriptions from './subscriptions/Subscriptions.js'
 
-function App({ socketConnected }) {
+function App() {
   const [events, setEvents] = useState([]);
   const [subscriptionError, setSubscriptionError] = useState(null);
   const [subscriptions, setSubscriptions] = useState({});
@@ -41,16 +42,14 @@ function App({ socketConnected }) {
 
 
   return (
-    <>
+    <div className="App-container">
       <Header />
-      {socketConnected ?
-        <SubscribeForm addSubscription={addSubscription} /> :
-        <p style={{textAlign: 'center'}}>Connecting to server</p>
-      }
+      <SubscribeForm addSubscription={addSubscription} />
       {subscriptionError && <p>{subscriptionError.message}</p>}
       <Subscriptions subscriptions={subscriptions} unsubscribe={unsubscribe} />
       <Events events={events} />
-    </>
+      <Footer />
+    </div>
   );
 }
 
