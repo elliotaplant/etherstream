@@ -11,7 +11,17 @@ function App({ socketConnected }) {
   const [subscriptionError, setSubscriptionError] = useState(null);
   const [subscriptions, setSubscriptions] = useState({});
 
-  const unsubscribe = (subscriptionKey) => setSubscriptions(({[subscriptionKey]: removing, ...others}) => others);
+  const unsubscribe = (subscriptionKey) => {
+    const subscriptionToRemove = subscriptions[subscriptionKey];
+    if (subscriptionToRemove) {
+      subscriptionToRemove.subscription.unsubscribe(err => {
+        if (err) {
+          console.error(err)
+        }
+        setSubscriptions(({[subscriptionKey]: removing, ...others}) => others)
+      })
+    }
+  };
 
   const addSubscription = ({ subscription, contract, topic }) => {
     const subscriptionKey = [contract, topic].join('-');
