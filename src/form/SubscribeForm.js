@@ -4,8 +4,10 @@ import Button from "../common/Button.js";
 import AddressInput from './AddressInput.js'
 import TopicInput from './TopicInput.js'
 const Web3 = require('web3');
+const {contractsByName} = require('./contractsByName')
 
 const web3 = new Web3(`wss://mainnet.infura.io/ws/v3/${process.env.REACT_APP_INFURA_ID}`)
+const contractOptions = Object.keys(contractsByName).map(name => ({ label: name, address: contractsByName[name] }));
 
 function fetchABI(address) {
   return fetch(`https://api.etherscan.io/api?module=contract&action=getabi&address=${address}&apikey=YourApiKeyToken`)
@@ -63,6 +65,7 @@ function SubscribeForm({ addSubscription }) {
           placeholder="Contract name (DAI) or address (0x123...)"
           value={address}
           onChange={e => storeAddress(e)}
+          options={contractOptions}
         />
       </label>
       <label className="SubscribeForm-label">
