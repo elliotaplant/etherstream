@@ -44,7 +44,9 @@ function App() {
   return (
     <div className="App-container">
       <Header />
-      <SubscribeForm addSubscription={addSubscription} />
+      <div>
+        <SubscribeForm addSubscription={addSubscription} />
+      </div>
       {subscriptionError && <p>{subscriptionError.message}</p>}
       <Subscriptions subscriptions={subscriptions} unsubscribe={unsubscribe} />
       <Events events={events} />
