@@ -32,7 +32,7 @@ function App() {
     }))
 
     subscription
-      .on('data', (event) => setEvents((events) => ([ event, ...events])))
+      .on('data', (event) => setEvents((events) => ([ event, ...events.slice(0, 50)])))
       .on('error', (err) => {
         console.error(err)
         setSubscriptionError(err)

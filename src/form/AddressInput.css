@@ -1,3 +1,7 @@
 .AddressInput-AsyncSelect {
   flex-grow: 1;
 }
+
+.AddressInput-AsyncSelect.found-abi {
+  border-color: var(--go-green);
+}

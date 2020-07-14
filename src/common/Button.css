@@ -32,6 +32,16 @@
   background-color: var(--go-green);
 }
 
+.Button-button.blue-violet-color-wheel {
+  color: var(--blue-violet-color-wheel);
+  border-color: var(--blue-violet-color-wheel);
+}
+
+.Button-button.blue-violet-color-wheel:hover {
+  color: white;
+  background-color: var(--blue-violet-color-wheel);
+}
+
 .Button-button:disabled {
   color: grey;
   border: 1px solid grey;

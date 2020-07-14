@@ -1,5 +1,6 @@
 .Subscription-li {
   list-style: none;
+  margin-bottom: 0.5rem;
 }
 
 .Subscription-button {

@@ -1,5 +1,4 @@
 .SubscribeForm-form {
-  /* margin: 0 auto; */
   max-width: 60rem;
   text-align: center;
   padding: 0 1rem;
@@ -8,7 +7,7 @@
 .SubscribeForm-label {
   display: flex;
   justify-content: space-between;
-  margin: 1rem 0;
+  margin-top: 0.5rem;
 }
 
 .SubscribeForm-input {
@@ -23,6 +22,20 @@
 }
 
 .SubscribeForm-button {
-  /* width: 50%; */
-  /* text-transform: uppercase; */
+  margin-top: 1rem;
+}
+
+.SubscribeForm-contract-status {
+  text-align: left;
+  margin-left: 11rem;
+  margin-top: 0.25rem;
+  padding-left: 11px;
+}
+
+.SubscribeForm-contract-status.found {
+  color: var(--go-green);
+}
+
+.SubscribeForm-contract-status.not-found {
+  color: var(--paradise-pink);
 }

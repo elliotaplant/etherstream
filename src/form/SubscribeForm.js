@@ -12,6 +12,13 @@ const contractOptions = Object.keys(contractsByName).map(name => ({ label: name,
 function fetchABI(address) {
   return fetch(`https://api.etherscan.io/api?module=contract&action=getabi&address=${address}&apikey=YourApiKeyToken`)
     .then(response => response.json())
+    .then(response => {
+      if (response.status === '1') {
+        return response
+      } else {
+        throw new Error(response.result)
+      }
+    })
     .then(({ result }) => JSON.parse(result));
 }
 
@@ -29,17 +36,24 @@ function SubscribeForm({ addSubscription }) {
   const [address, setAddress] = useState(null);
   const [topic, setTopic] = useState(null);
   const [contract, setContract] = useState(null);
+  const [contractStatus, setContractStatus] = useState(null);
 
   const storeAddress = (addressThing) => {
     localStorage.setItem("address", JSON.stringify(addressThing));
     if (addressThing) {
+      let lookupAddress = addressThing.label
       if (!addressThing.label.startsWith('0x')) {
-        fetchABI(addressThing.address)
-        .then(abi => {
-          const contract = new web3.eth.Contract(abi, addressThing.address)
-          setContract(contract)
-        })
+        lookupAddress = addressThing.address
       }
+      fetchABI(lookupAddress)
+        .then(abi => {
+          const contract = new web3.eth.Contract(abi, lookupAddress)
+          setContract(contract)
+          setContractStatus('found')
+        })
+        .catch(() => {
+          setContractStatus('not-found')
+        })
     }
     setAddress(addressThing);
   };
@@ -66,8 +80,16 @@ function SubscribeForm({ addSubscription }) {
           value={address}
           onChange={e => storeAddress(e)}
           options={contractOptions}
+          contractStatus={contractStatus}
         />
       </label>
+      {contractStatus ?
+        (contractStatus === 'found' ?
+          <div className="SubscribeForm-contract-status found">Contract ABI found</div> :
+          <div className="SubscribeForm-contract-status not-found">Unable to find contract ABI</div>
+        ) :
+        <div className="SubscribeForm-contract-status">&nbsp;</div>
+      }
       <label className="SubscribeForm-label">
         <span className="SubscribeForm-label-text">Topic</span>
         <TopicInput
@@ -86,6 +108,7 @@ function SubscribeForm({ addSubscription }) {
           subscribe(address, topic, contract, addSubscription)
           setTopic(null)
           setContract(null)
+          setContractStatus(null)
           setAddress(null)
         }}
       >
