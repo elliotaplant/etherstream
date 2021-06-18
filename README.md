@@ -1,5 +1,5 @@
 # Etherstream Client
-The front end for [www.etherstream.io](http://www.etherstream.io)
+An easy way to track events on the ethereum blockchain
 
 ## Getting started
 1. Clone the repo
